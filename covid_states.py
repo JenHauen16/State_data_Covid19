@@ -8,7 +8,7 @@ pd.set_option('display.max_columns', None)
 
 usconfirm_raw=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
 usdeaths_raw=pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
-state_pop=pd.read_excel('/Users/jenniferhauenstein/Documents/covid_scripts/State_Populations.xlsx')
+state_pop=pd.read_excel('/Users/jenniferhauenstein/Documents/covid_scripts/US_States_Covid19_Bar_Graphs/State_Populations.xlsx')
 
 usconfirm_sub=usconfirm_raw.iloc[1:,5:]
 usdeaths_sub=usdeaths_raw.iloc[1:,5:]
@@ -46,7 +46,7 @@ def covidplot(state):
         except IndexError:
             continue
     print(codf1)
-    confirm_total = usconfirmstates.loc[state, (date.today()- timedelta(days=2)).strftime("%-m/%d/%y")]["Cases"].sum() 
+    confirm_total = usconfirmstates.loc[state, (date.today()- timedelta(days=2)).strftime("%-m/%-d/%y")]["Cases"].sum() 
     print("Total Confirmed Cases for " + state + " is " + str(confirm_total))
     
     codeaths = pd.DataFrame(columns=col_names)
@@ -57,7 +57,7 @@ def covidplot(state):
         except IndexError:
             continue
     print(codeaths)                               
-    death_total = usdstates.loc[state, (date.today()- timedelta(days=2)).strftime("%-m/%d/%y")]['Cases'].sum()
+    death_total = usdstates.loc[state, (date.today()- timedelta(days=2)).strftime("%-m/%-d/%y")]['Cases'].sum()
     print("Total Deaths for " + state + " is " + str(death_total))
 
     #get value only for cell of dataframe use .values[0]
@@ -68,18 +68,18 @@ def covidplot(state):
     fig, (ax1, ax2) = plt.subplots(1,2, figsize=(9,5))
     ax1.bar(codf1["Date"], codf1["Cases"], color="red")
     ax1.set_xlabel("Date")
-    ax1.set_xticks(codf1["Date"][::10])
-    ax1.set_xticklabels(codf1["Date"][::10], rotation=90)
+    ax1.set_xticks(codf1["Date"][::7])
+    ax1.set_xticklabels(codf1["Date"][::7], rotation=90)
     ax1.set_ylabel("Cases")
-    ax1.set_title("Confirmed Covid19 Since January 22, 2020 \n Total Confirmed = {} - {}%".format(str(confirm_total), str(percon)))
+    ax1.set_title("Confirmed Covid19 Since January 22, 2020 \n Total Confirmed = {:,} - {}%".format(confirm_total, percon))
     ax2.bar(codeaths["Date"], codeaths["Cases"], color="black")
     ax2.set_xlabel("Date")
-    ax2.set_xticks(codeaths["Date"][::10])
-    ax2.set_xticklabels(codeaths["Date"][::10], rotation=90)
+    ax2.set_xticks(codeaths["Date"][::7])
+    ax2.set_xticklabels(codeaths["Date"][::7], rotation=90)
     ax2.set_ylabel("Cases")
-    ax2.set_title("Deaths Covid19 Since January 22, 2020 \n Total Deaths = {} - {}%".format(str(death_total), str(perdeath)))
+    ax2.set_title("Deaths Covid19 Since January 22, 2020 \n Total Deaths = {:,} - {}%".format(death_total, perdeath))
 
-    plt.suptitle('Covid19 data for {}. Total Population of {} is {}.'.format(state, state, str(pop)))
+    plt.suptitle('Covid19 data for {}. Total Population of {} is {:,}.'.format(state, state, pop))
     plt.show()
 
 covidplot("Georgia")
