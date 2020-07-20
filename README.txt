@@ -3,6 +3,12 @@ This script uses JHU Covid19 data and US Census Bureau data to create bar graphs
 To call the function:
 	covidplot("State")
 
+**Update**
+Another script is available to show Covid19 data for two states simultaneously. The first script was modified and the new script is called covid_statesx2.py.
+To call the function:
+	covidplot("State", "State") 
+
+
 Resources:
 
 Data import and data wrangling:
