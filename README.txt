@@ -3,15 +3,21 @@ This script uses JHU Covid19 data and US Census Bureau data to create bar graphs
 To call the function:
 	covidplot("State")
 
-**Update**
+**Update - 7/20/2020**
 Another script is available to show Covid19 data for two states simultaneously. The first script was modified and the new script is called covid_statesx2.py.
 To call the function:
-	covidplot("State", "State") 
+	covidplot("State", "State")
 
+**Update_2 - 7/21/2020**
+Total number of people tested was obtained from the JHU GitHub Covid dataset and used for calculating number of confirmed out of number tested.
 
 Resources:
 
 Data import and data wrangling:
+JHU Covid19 data on Github
+https://github.com/CSSEGISandData
+
+
 Analyzing Coronavirus (Covid-19) Data Using Pandas and Plotly
 https://towardsdatascience.com/analyzing-coronavirus-covid-19-data-using-pandas-and-plotly-2e34fe2c4edc
 
